@@ -7,8 +7,10 @@
 
 set -e
 
+nc -dkl 8080 &
+
 if [ "${1#-}" != "${1}" ] || [ -z "$(command -v "${1}")" ]; then
-  set -- curl "$@"
+  set -- sleep "$@"
 fi
 
 exec "$@"

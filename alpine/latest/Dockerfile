@@ -69,14 +69,14 @@ ENV CURL_GIT_REPO ${CURL_GIT_REPO}
 LABEL Maintainer="James Fuller <jim.fuller@webcomposite.com>"
 LABEL Name="curl"
 LABEL Version="${LABEL_VERSION}"
-LABEL docker.cmd="docker run -it curl/curl:8.00.1 -s -L http://curl.se"
+LABEL docker.cmd="docker run -it curl/curl:7.86.0 -s -L http://curl.se"
 
 ###############################################################
 # dependencies
 ###############################################################
 # RUN apk update
 RUN apk upgrade
-RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev && \
+RUN apk add --no-cache brotli brotli-dev libssh2 nghttp2-dev netcat-openbsd aws-cli busybox-extras && \
     rm -fr /var/cache/apk/*
 
 ###############################################################
@@ -110,5 +110,5 @@ USER curl_user
 # set entrypoint
 ###############################################################
 COPY "entrypoint.sh" "/entrypoint.sh"
-CMD ["curl"]
+CMD ["sleep"]
 ENTRYPOINT ["/entrypoint.sh"]
